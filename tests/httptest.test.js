@@ -16,6 +16,11 @@ test('there are three blogs', async () => {
   
     expect(response.body.length).toBe(3)
   })
+
+  test('id field is correctly named', async () => {
+    const response = await api.get('/api/blogs')
+    expect(response.body[0].id).toBeDefined()
+  })
   
 
 afterAll(() => {
