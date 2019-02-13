@@ -48,7 +48,7 @@ const blogs = [
     url: "http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html",
     likes: 2,
     __v: 0
-  }  
+  }
 ]
 
 test('dummy returns one', () => {
@@ -56,6 +56,19 @@ test('dummy returns one', () => {
 
   const result = listHelper.dummy(blogs)
   expect(result).toBe(1)
+})
+
+describe('blog selection', () => {
+
+  test('return favorite works', () => {
+    const Blog = listHelper.favoriteBlog(blogs)
+    expect(Blog._id).toBe("5a422b3a1b54a676234d17f9")
+  })
+
+  test('get author with most blogs', () => {
+    const author = listHelper.mostBlogs(blogs)
+    expect(author).toEqual({author: "Robert C. Martin", blogs: 3})
+  })
 })
 
 describe('total likes', () => {
@@ -74,4 +87,10 @@ describe('total likes', () => {
     const result = listHelper.totalLikes(listWithOneBlog)
     expect(result).toBe(5)
   })
+
+  test('of a bigger list is calculated correctly', () => {
+    const result = listHelper.totalLikes(blogs)
+    expect(result).toBe(36)
+  })
 })
+
